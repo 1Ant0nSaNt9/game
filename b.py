@@ -1,6 +1,7 @@
 import pygame
 
 pygame.init()
+import random
 
 
 win = pygame.display.set_mode((500, 500)) # Dies erzeugt ein Fenster von 500 Breite und 500 Höhe.
@@ -8,9 +9,10 @@ pygame.display.set_caption("First Game")
 
 x = 50
 y = 50
-width = 40
-height = 60
-vel = 5
+width = 50
+height = 50
+vel = 6
+color = (238, 130, 238)
 
 isJump = False
 jumpCount = 10
@@ -18,15 +20,19 @@ jumpCount = 10
 run = True
 
 while run:
-    pygame.time.delay(100)
+    pygame.time.delay(50)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
 
-    pygame.draw.rect(win, (255,0,0),(x, y, width, height))
-    pygame.display.update()
-
     keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_b]:
+        r = random.randint(0, 255)
+        g = random.randint(0, 255)
+        b = random.randint(0, 255)
+        color = (r, g, b)
 
     if keys[pygame.K_LEFT] and x > vel:
         x -= vel
@@ -58,7 +64,9 @@ while run:
 
         
     win.fill((0,0,0))
-    pygame.draw.rect(win, (255,0,0), (x, y, width, height))
+    pygame.draw.rect(win, color, (x, y, width, height))
     pygame.display.update()
+
+    
 
 pygame.quit() # Wenn wor die Schleife verlassen. wird dis ausgeführt und unser Spiel beendet. 
